@@ -20,7 +20,7 @@ class PostFactory extends Factory
             return [
             'title' => $this->faker->name(),
             'description' => $this->faker->text(),
-            'user_id' => $this->faker->numberBetween($min = 1, $max =5) 
+            'user_id' => $this->faker->numberBetween($min = 1, $max =9) 
         ];
      
     }

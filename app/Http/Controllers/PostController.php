@@ -26,13 +26,13 @@ class PostController extends Controller
         ]);
     }
 
-    
+    //public function store(StorePostRequest $request)
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => ['required' ,'min:5'],
-        //     'description' => ['required' ,'min:20'],
-        // ]);
+        $request->validate([
+            'title' => ['required' ,'min:5'],
+            'description' => ['required' ,'min:10'],
+        ]);
         Post::create($request->all());
         return redirect()->route('posts.index');
     }
