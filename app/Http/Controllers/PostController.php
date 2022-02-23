@@ -12,7 +12,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::all();
-        $posts = Post::paginate(5);
+        $posts = Post::paginate(3);
         
         return view('posts.index',[
             'posts' => $posts
@@ -74,25 +74,7 @@ class PostController extends Controller
         Post::where('id', $postID)->delete();
         return redirect()->route('posts.index');
     }
-    // public function getPosts(){
 
-    //     return
-    //     [
-    //         ['id' => 1, 'title' => 'first post', 'description' => 'first post describtion', 'posted_by' => 'Asmaa', 'email' => 'asmaa11298@mail.com', 'created_at' => '2022-02-19 5:00:00'],
-    //         ['id' => 2, 'title' => 'second post', 'description' => 'second post describtion', 'posted_by' => 'Ebrahim', 'email' => 'ebrahim@gmail.com', 'created_at' => '2022-02-19 06:00:30'],
-    //     ];
-    // }
-
-    // public function getPost($id)
-    // {
-    //     $posts = $this->getPosts();
-    //     foreach ($posts as $post) {
-    //         if ($post['id'] == $id) {
-    //             return $post;
-    //         }
-    //     }
-    //     return null;
-    // }
 }
 
   
