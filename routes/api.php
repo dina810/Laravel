@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -34,6 +34,7 @@ Route::get('/users',[UserController::class, 'index']);
 Route::get('/users/{user}',[UserController::class, 'show']);
 
 
+Route::post('/register', [RegisterController::class,'register']);
 //Route::post('/login', [AuthController::class,'login']);
 
 

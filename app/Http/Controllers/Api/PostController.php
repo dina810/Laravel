@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Http\Resources\PostResource;
 use App\Http\Controllers\Controller;
@@ -32,9 +34,11 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required' ,'min:5'],
             'description' => ['required' ,'min:10'],
+            
         ]);
-        $request= request()->all();
-        $post = Post::create($request);
+        $post = new Post($request->all());
+        $post->user_id = Auth::id();
+        $post->save();
         return new PostResource($post);
 
      } 
