@@ -11,16 +11,18 @@ class PostController extends Controller
 {
     public function index()
     {
-
         $posts=Post::all();
-        
         return  PostResource::collection($posts);
 
     } 
 
      public function show($postId)
      {
-         $post = Post::find($postId); //App\Model\Post
+         $post = Post::find($postId);
+        //  return response()->json([
+        //     'success' => true,
+        //     'data' => $post
+        // ]);
       
          return new PostResource($post);
      }
@@ -33,8 +35,26 @@ class PostController extends Controller
         ]);
         $request= request()->all();
         $post = Post::create($request);
-
         return new PostResource($post);
 
      } 
+     public function update(Request $request, $id)
+{
+    $post = Post::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+    ]);
+
+    $post->update($validatedData);
+    return new PostResource($post);
+    }
+    public function delete($postId)
+    {
+        $post = Post::find($postId);
+        $post->delete();
+        return new PostResource($post);
+ 
+    }
 }
