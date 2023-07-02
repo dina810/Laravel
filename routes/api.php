@@ -28,17 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/posts',[PostController::class, 'index']);
 Route::get('posts/{post}', [PostController::class, 'show']);
 
-
-
 Route::get('/users',[UserController::class, 'index']);
 Route::get('/users/{user}',[UserController::class, 'show']);
 
-
+//register
 Route::post('/register', [RegisterController::class,'register']);
-//Route::post('/login', [AuthController::class,'login']);
-
-
-
 
 Route::middleware('auth:sanctum')->group(function () {
     
@@ -50,7 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/users/{id}', [UserController::class, 'update']);
         Route::delete('/users/{id}', [UserController::class, 'delete']);
 });
- Route::post('/sanctum/token', function (Request $request)
+//login
+Route::post('/sanctum/token', function (Request $request)
  {
     $request->validate([
         'email' => 'required|email',
@@ -67,4 +62,10 @@ Route::middleware('auth:sanctum')->group(function () {
     }
 
     return $user->createToken($request->device_name)->plainTextToken;
+});
+
+//logout
+Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+    return response()->json(['message' => 'Logged out successfully']);
 });
