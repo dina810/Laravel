@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Auth;
-
-
 use App\Http\Resources\PostResource;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
